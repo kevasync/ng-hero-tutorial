@@ -27,7 +27,7 @@ h4 {
   width: 25%;
 }
 .module {
-  padding: 20px;
+  padding: 10px;
   text-align: center;
   color: #eee;
   max-height: 120px;
@@ -58,4 +58,29 @@ h4 {
   .module {
     min-width: 60px;
   }
+}
+
+.toast{
+  border-radius: 6px;
+  padding: 3px;
+  background-color: #EEE;
+  color: #607D8B;
+  float: right;
+}
+
+.adjust-ranking {
+  padding: 10px;
+}
+
+.adjust-ranking span{
+  border-radius: 10px;
+  background-color: #EEE;
+  color: #607D8B;
+  padding: 3px;
+  margin-right: 5px;
+}
+
+.adjust-ranking span:hover{x;
+  background-color: #607D8B;
+  color: #EEE;
 }

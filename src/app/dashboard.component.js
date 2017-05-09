@@ -18,7 +18,26 @@ var DashboardComponent = (function () {
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.skillService.getSkills()
-            .then(function (skills) { return _this.skills = skills.slice(1, 5); });
+            .then(function (skills) { return _this.skills = skills
+            .sort(function (sk1, sk2) { return sk2.ranking - sk1.ranking; }); });
+    };
+    DashboardComponent.prototype.incrementSkill = function (id) {
+        this.updateSkill(id, this.inc);
+    };
+    DashboardComponent.prototype.decrementSkill = function (id) {
+        this.updateSkill(id, this.dec);
+    };
+    DashboardComponent.prototype.updateSkill = function (id, modifier) {
+        var skill = this.skills.find(function (skill) { return skill.id == id; });
+        this.skillService.update(modifier(skill));
+    };
+    DashboardComponent.prototype.inc = function (s) {
+        s.ranking += 1;
+        return s;
+    };
+    DashboardComponent.prototype.dec = function (s) {
+        s.ranking -= 1;
+        return s;
     };
     return DashboardComponent;
 }());
