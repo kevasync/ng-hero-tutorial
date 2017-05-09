@@ -60,8 +60,8 @@ HeroesComponent = __decorate([
         templateUrl: './heroes.component.html',
         styleUrls: ['./heroes.component.css']
     }),
-    __metadata("design:paramtypes", [router_1.Router,
-        hero_service_1.HeroService])
+    __metadata("design:paramtypes", [router_1.Router, typeof (_a = typeof hero_service_1.HeroService !== "undefined" && hero_service_1.HeroService) === "function" && _a || Object])
 ], HeroesComponent);
 exports.HeroesComponent = HeroesComponent;
+var _a;
 //# sourceMappingURL=heroes.component.js.map

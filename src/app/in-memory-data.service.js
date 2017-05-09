@@ -3,19 +3,16 @@ var InMemoryDataService = (function () {
     function InMemoryDataService() {
     }
     InMemoryDataService.prototype.createDb = function () {
-        var heroes = [
-            { id: 11, name: 'Nice' },
-            { id: 12, name: 'Narco' },
-            { id: 13, name: 'Bombasto' },
-            { id: 14, name: 'Celeritas' },
-            { id: 15, name: 'Magneta' },
-            { id: 16, name: 'RubberMan' },
-            { id: 17, name: 'Dynama' },
-            { id: 18, name: 'Dr IQ' },
-            { id: 19, name: 'Magma' },
-            { id: 20, name: 'Tornado' }
+        var skills = [
+            { id: 1, name: 'HTML' },
+            { id: 2, name: 'JavaScript' },
+            { id: 3, name: '.NET' },
+            { id: 4, name: 'Java' },
+            { id: 5, name: 'Functional' },
+            { id: 6, name: 'iOS' },
+            { id: 7, name: 'Android' }
         ];
-        return { heroes: heroes };
+        return { skills: skills };
     };
     return InMemoryDataService;
 }());

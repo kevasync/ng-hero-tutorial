@@ -1,5 +1,4 @@
-import { Hero } from './hero';
-//import { HEROES } from './mock-heroes';
+import { Skill } from './skill';
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -7,59 +6,52 @@ import 'rxjs/add/operator/toPromise';
 
 
 @Injectable()
-export class HeroService {
+export class SkillService {
   
-  private heroesUrl = 'api/heroes';
+  private skillsUrl = 'api/skills';
 
   constructor(private http: Http) { }
 
-  getHeroes(): Promise<Hero[]> {
-    return this.http.get(this.heroesUrl)
+  getSkills(): Promise<Skill[]> {
+    return this.http.get(this.skillsUrl)
       .toPromise()
-      .then(response => response.json().data as Hero[])
+      .then(response => response.json().data as Skill[])
       .catch(this.handleError);
   }
 
-  getHeroesSlowly(): Promise<Hero[]> {
-    return new Promise(resolve => {
-      // Simulate server latency with 2 second delay
-      setTimeout(() => resolve(this.getHeroes()), 2000);
-    });
-  }
-
-  getHero(id: number): Promise<Hero> {
-    const url = `${this.heroesUrl}/${id}`;
+  getSkill(id: number): Promise<Skill> {
+    const url = `${this.skillsUrl}/${id}`;
     return this.http.get(url)
     .toPromise()
-    .then(response => response.json().data as Hero)
+    .then(response => response.json().data as Skill)
     .catch(this.handleError);
   }
   
   private headers = new Headers({'Content-Type': 'application/json'});
 
-  update(hero: Hero): Promise<Hero> {
-    const url = `${this.heroesUrl}/${hero.id}`;
+  update(skill: Skill): Promise<Skill> {
+    const url = `${this.skillsUrl}/${skill.id}`;
     return this.http
-      .put(url, JSON.stringify(hero), {headers: this.headers})
+      .put(url, JSON.stringify(skill), {headers: this.headers})
       .toPromise()
-      .then(() => hero)
+      .then(() => skill)
       .catch(this.handleError);
   }
 
   delete(id: number): Promise<void> {
-    const url = `${this.heroesUrl}/${id}`;
+    const url = `${this.skillsUrl}/${id}`;
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)
       .catch(this.handleError);
   }
 
-  create(name: string): Promise<Hero> {
+  create(name: string): Promise<Skill> {
     return this.http
-      .post(this.heroesUrl,
+      .post(this.skillsUrl,
       JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
-      .then(response => response.json().data as Hero)
+      .then(response => response.json().data as Skill)
       .catch(this.handleError);
   }
   
