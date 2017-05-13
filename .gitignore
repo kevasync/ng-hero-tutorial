@@ -1,3 +1,6 @@
+/src/app/*.js.*
+/src/app/*.js
+
 /build/
 /benchpress-build/
 .DS_Store
