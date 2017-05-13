@@ -16,19 +16,20 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit(): void {
     this.skillService.getSkills()
-      .then(skills => this.skills = skills
-      	.sort((sk1, sk2) => sk2.ranking - sk1.ranking));
+      .then(skills => {
+        this.skills = skills
+      })
   }
 
-  incrementSkill(id: number): void {
-    this.updateSkill(id, this.inc);
+  incrementSkill(id: string): void {
+    this.updateSkill(id, this.inc)
   }
-  decrementSkill(id: number): void {
-  	this.updateSkill(id, this.dec);
+  decrementSkill(id: string): void {
+  	this.updateSkill(id, this.dec)
   }
 
-  private updateSkill(id: number, modifier: (s: Skill) => Skill): void {
-  	var skill = this.skills.find(skill => skill.id == id);
+  private updateSkill(id: string, modifier: (s: Skill) => Skill): void {
+  	var skill = this.skills.find(skill => skill.id === id);
 	this.skillService.update(modifier(skill));
   }
 

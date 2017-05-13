@@ -1,4 +1,5 @@
 import { Skill } from './skill';
+import { CouchDbResponse } from './skill-record';
 import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
@@ -8,15 +9,18 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class SkillService {
   
-  private skillsUrl = 'api/skills';
+  private skillsUrl = 'http://localhost:5984/skill';
 
   constructor(private http: Http) { }
 
   getSkills(): Promise<Skill[]> {
-    return this.http.get(this.skillsUrl)
+    return this.http.get(`${this.skillsUrl}/_all_docs?include_docs=true`)
       .toPromise()
-      .then(response => response.json().data as Skill[])
-      .catch(this.handleError);
+      .then(response => {
+        var r = response.json() as CouchDbResponse
+        return r.rows.map(r => new Skill(r.doc.id, r.doc.name))
+      })
+      .catch(this.handleError)
   }
 
   getSkill(id: number): Promise<Skill> {
@@ -24,7 +28,7 @@ export class SkillService {
     return this.http.get(url)
     .toPromise()
     .then(response => response.json().data as Skill)
-    .catch(this.handleError);
+    .catch(this.handleError)
   }
   
   private headers = new Headers({'Content-Type': 'application/json'});
@@ -35,7 +39,7 @@ export class SkillService {
       .put(url, JSON.stringify(skill), {headers: this.headers})
       .toPromise()
       .then(() => skill)
-      .catch(this.handleError);
+      .catch(this.handleError)
   }
 
   delete(id: number): Promise<void> {
@@ -43,7 +47,7 @@ export class SkillService {
     return this.http.delete(url, {headers: this.headers})
       .toPromise()
       .then(() => null)
-      .catch(this.handleError);
+      .catch(this.handleError)
   }
 
   create(name: string): Promise<Skill> {
@@ -52,11 +56,11 @@ export class SkillService {
       JSON.stringify({name: name}), {headers: this.headers})
       .toPromise()
       .then(response => response.json().data as Skill)
-      .catch(this.handleError);
+      .catch(this.handleError)
   }
   
   private handleError(error: any): Promise<any> {
     console.error('an error occured', error);
-    return Promise.reject(error.message || error);
+    return Promise.reject(error.message || error)
   }
 }

@@ -8,19 +8,23 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var skill_1 = require("./skill");
 var core_1 = require("@angular/core");
 var http_1 = require("@angular/http");
 require("rxjs/add/operator/toPromise");
 var SkillService = (function () {
     function SkillService(http) {
         this.http = http;
-        this.skillsUrl = 'api/skills';
+        this.skillsUrl = 'http://localhost:5984/skill';
         this.headers = new http_1.Headers({ 'Content-Type': 'application/json' });
     }
     SkillService.prototype.getSkills = function () {
-        return this.http.get(this.skillsUrl)
+        return this.http.get(this.skillsUrl + "/_all_docs?include_docs=true")
             .toPromise()
-            .then(function (response) { return response.json().data; })
+            .then(function (response) {
+            var r = response.json();
+            return r.rows.map(function (r) { return new skill_1.Skill(r.doc.id, r.doc.name); });
+        })
             .catch(this.handleError);
     };
     SkillService.prototype.getSkill = function (id) {

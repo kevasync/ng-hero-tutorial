@@ -18,8 +18,9 @@ var DashboardComponent = (function () {
     DashboardComponent.prototype.ngOnInit = function () {
         var _this = this;
         this.skillService.getSkills()
-            .then(function (skills) { return _this.skills = skills
-            .sort(function (sk1, sk2) { return sk2.ranking - sk1.ranking; }); });
+            .then(function (skills) {
+            _this.skills = skills;
+        });
     };
     DashboardComponent.prototype.incrementSkill = function (id) {
         this.updateSkill(id, this.inc);
@@ -28,7 +29,7 @@ var DashboardComponent = (function () {
         this.updateSkill(id, this.dec);
     };
     DashboardComponent.prototype.updateSkill = function (id, modifier) {
-        var skill = this.skills.find(function (skill) { return skill.id == id; });
+        var skill = this.skills.find(function (skill) { return skill.id === id; });
         this.skillService.update(modifier(skill));
     };
     DashboardComponent.prototype.inc = function (s) {
