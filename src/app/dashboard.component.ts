@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Skill } from './skill';
 import { User } from './user';
 import { SkillService } from './skill.service';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'my-dashboard',
@@ -16,11 +17,11 @@ export class DashboardComponent implements OnInit {
   currentUser: User
   userJson: string
 
-  constructor(private skillService: SkillService) { }
+  constructor(private skillService: SkillService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.currentUser = new User()
-    this.skillService.getSkills().then(skills => this.skills = skills)
+    this.skillService.get().then(skills => this.skills = skills)
   }
 
   userChanged(userId: string): void {
@@ -33,5 +34,9 @@ export class DashboardComponent implements OnInit {
   
   decrementSkill(id: number, oldValue: number): void {
   	this.currentUser.updateRanking(id, this.currentUser.getRankingBySkill(id)-1)
+  }
+
+  save(): void {
+    this.userService.update(this.currentUser)
   }
 }

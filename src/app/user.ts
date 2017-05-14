@@ -1,4 +1,5 @@
 import { Ranking } from './ranking';
+
 export class User {
 	id: string;
 	rankings: Ranking[];

@@ -12,3 +12,6 @@ curl -X PUT http://localhost:5984/skill/4 -d '{"id": 4, "name": "Java"}'
 curl -X PUT http://localhost:5984/skill/5 -d '{"id": 5, "name": "Functional"}'
 curl -X PUT http://localhost:5984/skill/6 -d '{"id": 6, "name": "iOS"}'
 curl -X PUT http://localhost:5984/skill/7 -d '{"id": 7, "name": "Android"}'
+
+curl -X DELETE http://localhost:5984/user
+curl -X PUT http://localhost:5984/user
