@@ -2,9 +2,11 @@ import { Ranking } from './ranking';
 
 export class User {
 	id: string;
+	location: number;
 	rankings: Ranking[];
 
 	constructor() {
+		this.id = ''
 		this.rankings = []
 	}
 

@@ -1,6 +1,10 @@
 <h3>
   <div>
-    <input #user (keyup)="userChanged(user.value)" placeholder="Enter User ID" />
+    <select #location (change)="locationChanged(location.value)">
+      <option value="">Select Location</option>
+      <option *ngFor="let location of locations" value="{{location.id}}">{{location.name}}</option>
+    </select>
+    <input  #user (keyup)="userChanged(user.value)" placeholder="Enter User ID" />
   </div>
   <div>Self Staffing Skills Input</div>
 </h3>
