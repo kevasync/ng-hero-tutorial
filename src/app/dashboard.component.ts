@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { Skill } from './skill';
+import { User } from './user';
 import { SkillService } from './skill.service';
 
 @Component({
@@ -8,38 +9,29 @@ import { SkillService } from './skill.service';
   templateUrl: './dashboard.component.html',
   styleUrls: [ './dashboard.component.css' ]
 })
+
 export class DashboardComponent implements OnInit {
 
-  skills: Skill[] = [];
+  skills: Skill[]
+  currentUser: User
+  userJson: string
 
   constructor(private skillService: SkillService) { }
 
   ngOnInit(): void {
-    this.skillService.getSkills()
-      .then(skills => {
-        this.skills = skills
-      })
+    this.currentUser = new User()
+    this.skillService.getSkills().then(skills => this.skills = skills)
   }
 
-  incrementSkill(id: string): void {
-    this.updateSkill(id, this.inc)
-  }
-  decrementSkill(id: string): void {
-  	this.updateSkill(id, this.dec)
+  userChanged(userId: string): void {
+    this.currentUser.id = userId
   }
 
-  private updateSkill(id: string, modifier: (s: Skill) => Skill): void {
-  	var skill = this.skills.find(skill => skill.id === id);
-	this.skillService.update(modifier(skill));
+  incrementSkill(id: number, oldValue: number): void {
+    this.currentUser.updateRanking(id, this.currentUser.getRankingBySkill(id)+1)
   }
-
-  private inc(s:Skill): Skill{
-	s.ranking += 1;
-	return s;	
-  }
-
-  private dec(s:Skill): Skill{
-  	s.ranking -= 1;
-  	return s;	
+  
+  decrementSkill(id: number, oldValue: number): void {
+  	this.currentUser.updateRanking(id, this.currentUser.getRankingBySkill(id)-1)
   }
 }

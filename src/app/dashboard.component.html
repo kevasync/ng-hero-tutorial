@@ -1,16 +1,20 @@
-<h3>Self Staffing Skills Input</h3>
+<h3>
+  <div>
+    <input #user (keyup)="userChanged(user.value)" placeholder="Enter User ID" />
+  </div>
+  <div>Self Staffing Skills Input</div>
+</h3>
+
 <div class="grid grid-pad">
   <a *ngFor="let skill of skills" class="col-1-4">
-  <!-- <a *ngFor="let hero of heroes"  [routerLink]="['/detail', hero.id]"  class="col-1-4"> -->
     <div class="module skill">
       <h4>
-      	<div><span>{{skill.name}}</span><span class="toast">{{skill.ranking}}</span></div>
+      	<div><span>{{skill.name}}</span><span class="toast">{{currentUser.getRankingBySkill(skill.id)}}</span></div>
       	<div class="adjust-ranking">
       		<span (click)="decrementSkill(skill.id)">-</span>
       		<span (click)="incrementSkill(skill.id)">+</span>
-  		</div>
+  		  </div>
   	  </h4>
     </div>
   </a>
-</div>
-<!-- <hero-search></hero-search> -->
+</div>  

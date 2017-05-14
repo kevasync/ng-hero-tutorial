@@ -4,8 +4,6 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 
-
-
 @Injectable()
 export class SkillService {
   
@@ -18,7 +16,7 @@ export class SkillService {
       .toPromise()
       .then(response => {
         var r = response.json() as CouchDbResponse
-        return r.rows.map(r => new Skill(r.doc.id, r.doc.name))
+        return r.rows.map(r => <Skill>{id: r.doc.id, name: r.doc.name})
       })
       .catch(this.handleError)
   }

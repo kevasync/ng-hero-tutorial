@@ -5,7 +5,7 @@ export class Value {
 export class SkillRecord {
     _id: string;
     _rev: string;
-     id: string;
+     id: number;
      name : string;
 
 }
