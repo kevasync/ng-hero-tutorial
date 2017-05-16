@@ -1,9 +1,10 @@
 import { Ranking } from './ranking';
 
 export class User {
-	id: string;
-	location: number;
-	rankings: Ranking[];
+	id: string
+	location: number
+	team: number
+	rankings: Ranking[]
 
 	constructor() {
 		this.id = ''

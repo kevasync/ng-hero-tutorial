@@ -7,6 +7,7 @@ import { DashboardComponent }   from './dashboard.component';
 import { SkillService }          from './skill.service';
 import { UserService }          from './user.service';
 import { LocationService }          from './location.service';
+import { TeamService }          from './team.service';
 
 import { AppRoutingModule }     from './app-routing.module';
 
@@ -23,7 +24,8 @@ import { AppRoutingModule }     from './app-routing.module';
   providers: [ 
     SkillService,
     UserService,
-    LocationService
+    LocationService,
+    TeamService
   ],
   bootstrap: [ AppComponent ]
 })
